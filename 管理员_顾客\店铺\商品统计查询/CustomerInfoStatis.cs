@@ -40,22 +40,22 @@ namespace DBTest
                     total_costs = reader.GetDouble(0);
                     customer_count = reader.GetInt32(1);
                     avg_costs = reader.GetDouble(2);
-                    MessageBox.Show("总花费：" + total_costs.ToString());
-                    MessageBox.Show("顾客总数：" + customer_count.ToString());
-                    MessageBox.Show("平均花费：" + avg_costs.ToString());
+                 //   MessageBox.Show("总花费：" + total_costs.ToString());
+                 //   MessageBox.Show("顾客总数：" + customer_count.ToString());
+                //  MessageBox.Show("平均花费：" + avg_costs.ToString());
 
                 }
             }
 
         }
 
-        static public int[] customer_day_costs = new int[32];//下标对应日期，存放指定月每日顾客开销
+        static public double[] customer_day_costs = new double[32];//下标对应日期，存放指定月每日顾客开销
 
         /*  查询顾客消费 月报表  
          *  参数 指定某年某月   */
         static public void CostForEachDay(int year,int month)
         {
-            customer_day_costs[0] = -1;
+            customer_day_costs[0] = -1.0;
             string date = Date(year, month, -1);
             string connString = "server=localhost;database=db_mall;uid=root;pwd=dzy123.0";
             MySqlConnection conn = new MySqlConnection(connString);
@@ -70,18 +70,18 @@ namespace DBTest
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    customer_day_costs[reader.GetInt32(1)] = reader.GetInt32(0);
+                    customer_day_costs[reader.GetInt32(1)] = reader.GetDouble(0);
                 }
             }
         }
 
-        static public int[] customer_month_costs = new int[13];//下标对应月份，存放指定年每月顾客开销
+        static public double[] customer_month_costs = new double[13];//下标对应月份，存放指定年每月顾客开销
 
         /*  查询顾客消费 年报表  
          *  参数 指定某年   */
         static public void CostForEachMonth(int year)
         {
-            customer_month_costs[0] = -1;
+            customer_month_costs[0] = -1.0;
             string date = Date(year, -1, -1);
             string connString = "server=localhost;database=db_mall;uid=root;pwd=dzy123.0";
             MySqlConnection conn = new MySqlConnection(connString);
@@ -96,7 +96,7 @@ namespace DBTest
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    customer_month_costs[reader.GetInt32(1)] = reader.GetInt32(0);
+                    customer_month_costs[reader.GetInt32(1)] = reader.GetDouble(0);
                 }
             }
         }
