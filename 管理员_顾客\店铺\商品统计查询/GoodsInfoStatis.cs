@@ -14,12 +14,12 @@ namespace DBTest
         {
             public string type;//商品类型
             public int quantity;//销售量
-            public int proceeds;//销售额
+            public double proceeds;//销售额
         };
 
         static public List<GoodsInfo> GoodsStatInfo = new List<GoodsInfo>();
 
-        static public int[] goods_month_sales = new int[13];//存放1-12月商品销量或销售额 数组下标对应月份
+        static public double[] goods_month_sales = new double[13];//存放1-12月商品销量或销售额 数组下标对应月份
 
         static public string Date(int year,int month,int day)//日期处理
         {
@@ -99,7 +99,7 @@ namespace DBTest
                     //对于不同的数据库字段类型，我们需要用不同的方法获取
                     temp.type = reader.GetString(0);
                     temp.quantity = reader.GetInt32(1);
-                    temp.proceeds = reader.GetInt32(2);
+                    temp.proceeds = reader.GetDouble(2);
                     GoodsStatInfo.Add(temp);
                 }
             }
@@ -110,7 +110,7 @@ namespace DBTest
          *   必须有年份才可以查看年报表                  */
         static public void SalesForEachMonth(int year,string goodsType,int searchType)
         {
-            goods_month_sales[0] = -1;
+            goods_month_sales[0] = -1.0;
 
             string Year = Date(year, -1, -1);
 
@@ -136,7 +136,7 @@ namespace DBTest
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    goods_month_sales[reader.GetInt32(1)] = reader.GetInt32(0);
+                    goods_month_sales[reader.GetInt32(1)] = reader.GetDouble(0);
                 }
             }
         }

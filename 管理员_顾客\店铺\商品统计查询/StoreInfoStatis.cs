@@ -17,7 +17,7 @@ namespace DBTest
             public string name;
             public string type;
             public int quantity;
-            public int proceeds;
+            public double proceeds;
             public double assessment;
         };
 
@@ -57,7 +57,7 @@ namespace DBTest
                     //对于不同的数据库字段类型，我们需要用不同的方法获取
                     temp.type = reader.GetString(0);
                     temp.quantity = reader.GetInt32(1);
-                    temp.proceeds = reader.GetInt32(2);
+                    temp.proceeds = reader.GetDouble(2);
                     StoreStatInfo.Add(temp);
                 }
             }
@@ -96,7 +96,7 @@ namespace DBTest
                 {
                     temp.name = reader.GetString(0);
                     temp.quantity = reader.GetInt32(1);
-                    temp.proceeds = reader.GetInt32(2);
+                    temp.proceeds = reader.GetDouble(2);
                     temp.type = storeType;
                     StoreStatInfo.Add(temp);
                 }
