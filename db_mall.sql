@@ -283,7 +283,7 @@ DROP TABLE IF EXISTS `transportinfo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transportinfo` (
   `trans_id` int unsigned NOT NULL,
-  `departure` datetime NOT NULL,
+  `departure` varchar(80) NOT NULL,
   `destination` varchar(80) NOT NULL,
   `fare` float unsigned NOT NULL,
   PRIMARY KEY (`trans_id`)
